@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 use App\Models\User;
 
 class AuthController extends Controller
@@ -71,5 +72,25 @@ class AuthController extends Controller
             'status' => true,
             'message' => 'Logged out successfully'
         ]);
+    }
+
+
+    
+    public function loginDemo(Request $request)
+    {
+        $email = $request->input('email');
+        $password = $request->input('password');
+
+        $user = DB::select("
+            SELECT * FROM users 
+            WHERE email = '$email' 
+            AND password = '$password'
+        ");
+
+        if ($user) {
+            return "Login Successful (VULNERABLE)";
+        }
+
+        return "Login Failed";
     }
 }

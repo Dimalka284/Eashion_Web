@@ -6,7 +6,6 @@ use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CartController;
 
-//New 
 
 //Flutter Api
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -27,6 +26,9 @@ Route::middleware(['auth:sanctum', 'customer'])->group(function () {
     Route::put('cart/{cartItem}', [CartController::class, 'update']);
     Route::post('/logout',[AuthController::class,'logout']);
 });
+
+
+// Route::post('/login-demo', [AuthController::class, 'loginDemo']);
 
 
 
