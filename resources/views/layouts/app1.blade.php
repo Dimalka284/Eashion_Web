@@ -17,22 +17,30 @@
         </p>
     </div>
 
-    <nav class="sticky top-0 z-50 border-b border-gray-100 bg-white/80 backdrop-blur-xl transition-all duration-300" id="main-nav">
+    <nav class="sticky top-0 z-50 border-b border-gray-100 bg-white/90 backdrop-blur-xl transition-all duration-300" id="main-nav">
         <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
-                <div class="items-center hidden gap-10 lg:flex">
-                    <x-navbar />
+                
+                <!-- Left: Menu (Mobile) / Nav Links (Desktop) -->
+                <div class="flex items-center flex-1">
+                    <div class="lg:hidden -ml-2">
+                        <livewire:mobile-menu />
+                    </div>
+                    <div class="hidden lg:flex items-center gap-10">
+                        <x-navbar />
+                    </div>
                 </div>
 
-                <div class="absolute left-1/2 -translate-x-1/2">
+                <!-- Center: Logo -->
+                <div class="flex-shrink-0">
                     <a href="{{ url('/') }}" class="group flex flex-col items-center">
-                        <span class="text-3xl font-black tracking-[0.15em] text-black">EASHION</span>
+                        <span class="text-xl sm:text-2xl md:text-3xl font-black tracking-[0.15em] text-black transition-all duration-300">EASHION</span>
                         <div class="h-0.5 w-0 bg-black transition-all duration-300 group-hover:w-full"></div>
                     </a>
                 </div>
 
                 <!-- Right Side: Icons & Actions -->
-                <div class="flex items-center gap-2 sm:gap-6">
+                <div class="flex items-center justify-end flex-1 gap-1 sm:gap-4 lg:gap-6">
                     <!-- Search -->
                     <button class="p-2 text-gray-900 transition-all duration-300 rounded-full hover:bg-gray-100 group">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 transition-transform group-hover:scale-110">
@@ -51,20 +59,14 @@
                     </a>
 
                     <!-- Profile -->
-                    <div class="pl-2 ml-2 border-l border-gray-200">
+                    <div class="pl-2 ml-1 border-l border-gray-100">
                         <livewire:profile-dropdown />
                     </div>
-
-                    <!-- Mobile Menu Button (Hamburger) -->
-                    <button class="p-2 -mr-2 text-gray-900 lg:hidden">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                        </svg>
-                    </button>
                 </div>
             </div>
         </div>
     </nav>
+
 
     <!-- MAIN CONTENT -->
     <main class="w-full">

@@ -16,7 +16,7 @@
 
         <!-- Dropdown Menu -->
         @if($open)
-            <div class="absolute right-0 z-50 w-56 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg">
+            <div class="absolute right-0 z-[110] w-64 mt-3 bg-white border border-gray-100 rounded-xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] overflow-hidden transform origin-top-right transition-all">
 
                 <div class="px-4 py-3 text-sm text-gray-600">
                     <p class="font-semibold text-gray-800">{{ auth()->user()->name }}</p>
