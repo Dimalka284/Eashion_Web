@@ -28,7 +28,7 @@ Route::middleware(['auth:sanctum', 'customer'])->group(function () {
 });
 
 
-// Route::post('/login-demo', [AuthController::class, 'loginDemo']);
+Route::post('/login-demo', [AuthController::class, 'loginDemo']);
 
 
 
