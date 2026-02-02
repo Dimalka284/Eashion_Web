@@ -77,20 +77,19 @@ class AuthController extends Controller
 
     
     public function loginDemo(Request $request)
-    {
-        $email = $request->input('email');
-        $password = $request->input('password');
+{
+    $email = $request->input('email');
+    $password = $request->input('password');
 
-        $user = DB::select("
-            SELECT * FROM users 
-            WHERE email = '$email' 
-            AND password = '$password'
-        ");
+    $user = DB::select(
+        "SELECT * FROM users WHERE email = ? AND password = ?",
+        [$email, $password]
+    );
 
-        if ($user) {
-            return "Login Successful (VULNERABLE)";
-        }
-
-        return "Login Failed";
+    if (!empty($user)) {
+        return "Login Successful (SAFE)";
     }
+
+    return "Login Failed";
+}
 }
