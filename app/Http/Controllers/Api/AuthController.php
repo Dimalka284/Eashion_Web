@@ -65,6 +65,38 @@ class AuthController extends Controller
         ], 201);
     }
 
+    public function googleLogin(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'name' => 'required|string',
+            'google_id' => 'nullable|string',
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user) {
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => \Illuminate\Support\Facades\Hash::make(\Illuminate\Support\Str::random(16)),
+                'role_id' => 2,
+            ]);
+        }
+
+        $token = $user->createToken('mobile_token')->plainTextToken;
+
+        return response()->json([
+            'status' => true,
+            'token' => $token,
+            'user' => [
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+            ]
+        ]);
+    }
+
     public function logout(Request $request){
 
         $request->user()->currentAccessToken()->delete();
@@ -75,21 +107,21 @@ class AuthController extends Controller
     }
 
 
-    
-    public function loginDemo(Request $request)
-{
-    $email = $request->input('email');
-    $password = $request->input('password');
+        
+        public function loginDemo(Request $request)
+    {
+        $email = $request->input('email');
+        $password = $request->input('password');
 
-    $user = DB::select(
-        "SELECT * FROM users WHERE email = ? AND password = ?",
-        [$email, $password]
-    );
+        $user = DB::select(
+            "SELECT * FROM users WHERE email = ? AND password = ?",
+            [$email, $password]
+        );
 
-    if (!empty($user)) {
-        return "Login Successful (SAFE)";
+        if (!empty($user)) {
+            return "Login Successful (SAFE)";
+        }
+
+        return "Login Failed";
     }
-
-    return "Login Failed";
-}
 }

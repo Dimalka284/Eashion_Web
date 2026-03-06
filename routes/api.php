@@ -13,6 +13,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
+Route::post('/google-login', [AuthController::class, 'googleLogin']);
 Route::get('/products', [ProductController::class, 'apiIndex'])->name('products.apiIndex');
 Route::get('/discount',[ProductController::class,'DiscountProducts']);
 Route::get('/categoryproducts', [ProductController::class, 'byCategory']);
